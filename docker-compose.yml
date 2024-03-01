@@ -1,0 +1,21 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: Akshali3208
+      MYSQL_DATABASE: my_db
+      MYSQL_USER: akshali
+      MYSQL_PASSWORD: Akshali3208
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  stream:
+    image: stream-image
+    ports:
+      - "8501:8501"
+    depends_on:
+      - mysql
+    environment:
+      -  DATABASE_URL=mysql://akshali:Akshali3208@mysql/my_db
+
